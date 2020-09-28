@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
         self.chores << chore
     end
         
-
     def chore_names
         self.chores.map {|chore| chore.name}
     end
