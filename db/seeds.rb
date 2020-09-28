@@ -9,7 +9,7 @@ dishes = Chore.create(name: "Do the Dishes")
 trash = Chore.create(name: "Take out the trash")
 
 
-assign_1 = ChoreAssign.assign_chore(susan, dishes)
-assign_2 = ChoreAssign.assign_chore(bobby, trash)
+assign_1 = ChoreAssign.create()
 
-assign_1.users = susan
+assign_1.user = susan
+assign_1.chore = dishes
