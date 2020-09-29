@@ -25,7 +25,11 @@ class Welcome
         elsif answer == "login"
             LogIn.info
         else
+            system("clear")
             puts "Not a valid response"
+            puts ""
+            self.register_or_login
+
         end
     end
 
@@ -44,11 +48,13 @@ class Registration
 
     def self.newUser 
         User.create(name: @@name, email_address: @@email, password: @@password)
+        MainMenu.menu
     end
 end
 
 class LogIn
     def self.info
+        
         puts "What is your email address?"
         email = gets.chomp
         puts "Please enter your password"
@@ -56,6 +62,7 @@ class LogIn
 
         User.all.map do |user|
             if user.email_address == email && user.password == password
+                system("clear")
                 puts "Welcome #{user.name}!"
                 MainMenu.menu
             end
@@ -68,15 +75,53 @@ class MainMenu
     def self.menu
         prompt = TTY::Prompt.new
         choice = prompt.select("What would you like to do?", [
-            'View Chore Assignments',
-            'Mark Chore Complete',
             'Add Roommate',
             'Delete Roommate',
             'Add Chore',
             'Delete Chore',
+            'View Chore Assignments',
+            'Mark Chore Complete',
             'Randomize Chores',
             'Switch Chores',
             'Send Reminders'
         ])
+    end
+
+    def self.view_chore_assignments
+    end
+
+    def self.mark_complete
+    end
+
+    def self.add_roommate
+    end
+
+    def self.delete_roommate
+    end
+
+    def self.add_chore
+    end
+
+    def self.delete_chore
+    end
+
+    def self.randomize_chores
+    end
+
+    def self.switch_chores
+    end
+
+    def self.send_reminders
+        mail = Mail.new do
+            from    'ChoreBot'
+            to      'j.watsonreid@gmail.com'
+            subject 'This is a test email'
+            body    "Hello! This is a friendly reminder from ChoreBot to 
+                    please complete your chores by the end of the week! 
+                    
+                    Thank you!"
+        end
+        mail.delivery_method :sendmail
+        mail.deliver
     end
 end
