@@ -1,5 +1,5 @@
 ##CLI file for storing CLI classes and methods
-require 'tty-prompt'
+
 
 
 class Welcome
@@ -11,6 +11,7 @@ class Welcome
 end
 
 class Registration
+
 
 end
 
