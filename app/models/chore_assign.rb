@@ -2,6 +2,8 @@ class ChoreAssign < ActiveRecord::Base
     belongs_to :user
     belongs_to :chore
     @@all_chores = []
+
+    
     def self.user_reset
         User.all.map {|user| user.chores.clear}
     end
