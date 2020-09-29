@@ -2,6 +2,20 @@ class User < ActiveRecord::Base
     has_many :chore_assigns
     has_many :chores, through: :chore_assigns
 
+    def self.names
+        self.all.map {|user| user.name}
+    end
+
+    def self.chore_status
+        self.all.map do |user|
+            if user.status == false
+                "incomplete"
+            else
+                "complete"
+            end
+        end
+    end
+    
     def add_chore(chore)
         self.chores << chore
     end

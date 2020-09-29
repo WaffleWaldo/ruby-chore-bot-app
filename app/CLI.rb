@@ -1,7 +1,4 @@
-##CLI file for storing CLI classes and methods
-
-
-
+##CLI file for storing CLI classes and method
 class Welcome
     ##Print Welcome message to screen
     
@@ -32,8 +29,6 @@ class Welcome
 
         end
     end
-
-
 end
 
 class Registration
@@ -47,7 +42,9 @@ class Registration
     end
 
     def self.newUser 
-        User.create(name: @@name, email_address: @@email, password: @@password)
+        user = User.create(name: @@name, email_address: @@email, password: @@password)
+        system("clear")
+        puts "Welcome #{user.name}!"
         MainMenu.menu
     end
 end
@@ -71,35 +68,58 @@ class LogIn
 end
 
 
-class MainMenu
+class MainMenu 
     def self.menu
         prompt = TTY::Prompt.new
-        choice = prompt.select("What would you like to do?", [
-            'Add Roommate',
-            'Delete Roommate',
-            'Add Chore',
-            'Delete Chore',
-            'View Chore Assignments',
-            'Mark Chore Complete',
-            'Randomize Chores',
-            'Switch Chores',
-            'Send Reminders'
+        @@input = prompt.select("What would you like to do?", [
+        'Add Roommate',
+        'Delete Roommate',
+        'Add Chore',
+        'Delete Chore',
+        'View Chore Assignments',
+        'Mark Chore Complete',
+        'Randomize Chores',
+        'Switch Chores',
+        'Send Reminders',
+        'Exit'
         ])
     end
 
+    def menu_choice
+        if @@input == "Add Roommate".downcase
+            self.add_roommate
+        end
+    end
+
     def self.view_chore_assignments
+        ##still working on trying to find nice way of outputting this data
+        
+        # table = TTY::Table.new(["Name","Chore","Status"], [["reid","dishes"+'/n',"complete"],[]])
+        # puts table.render(:ascii)
     end
 
     def self.mark_complete
     end
 
     def self.add_roommate
+        puts "What is your rommate's full name?"
+        name = gets.chomp
+        puts "What is your roommate's email address?"
+        email = get.chomp
+        User.create(name:name,email_address:email)
+        puts "Success! Roommate added"
     end
 
     def self.delete_roommate
+
     end
 
     def self.add_chore
+        puts "Please type in a short description of
+                of the chore you would like to add:"
+        chore_name = gets.chomp
+        Chore.create(name:chore_name)
+        puts "Success! Chore added"
     end
 
     def self.delete_chore

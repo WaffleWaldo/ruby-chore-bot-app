@@ -3,7 +3,10 @@ class ChoreAssign < ActiveRecord::Base
     belongs_to :chore
     @@all_chores = []
 
-    
+    def self.construct_display
+        display = []
+        
+    end
     def self.user_reset
         User.all.map {|user| user.chores.clear}
     end
