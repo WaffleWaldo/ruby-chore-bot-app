@@ -4,9 +4,7 @@ require_relative '../app/CLI.rb'
 Welcome.welcome_msg
 Welcome.register_or_login
 
-# Registration.info
-# Registration.newUser
-# LogIn.info
+
 
 
 

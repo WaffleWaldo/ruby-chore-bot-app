@@ -4,7 +4,13 @@
 
 class Welcome
     ##Print Welcome message to screen
+    
+    @@font = TTY::Font.new(:doom)
+    @@pastel = Pastel.new
+
     def self.welcome_msg
+
+        puts @@pastel.cyan(@@font.write("ChoreBot"))
         puts "Welcome to ChoreBot!"
         puts "The digital chore wheel"
     end
@@ -50,7 +56,8 @@ class LogIn
 
         User.all.map do |user|
             if user.email_address == email && user.password == password
-                puts "Welcome #{user.name}, how can I help you?"
+                puts "Welcome #{user.name}!"
+                MainMenu.menu
             end
         end
     end
@@ -58,4 +65,18 @@ end
 
 
 class MainMenu
+    def self.menu
+        prompt = TTY::Prompt.new
+        choice = prompt.select("What would you like to do?", [
+            'View Chore Assignments',
+            'Mark Chore Complete',
+            'Add Roommate',
+            'Delete Roommate',
+            'Add Chore',
+            'Delete Chore',
+            'Randomize Chores',
+            'Switch Chores',
+            'Send Reminders'
+        ])
+    end
 end
