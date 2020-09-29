@@ -13,3 +13,4 @@ trash = Chore.create(name: "Take out the trash")
 sweep = Chore.create(name: "Sweep the floors")
 bathroom = Chore.create(name: "Clean the bathroom")
 
+
