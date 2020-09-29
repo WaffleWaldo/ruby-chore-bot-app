@@ -12,18 +12,18 @@ end
 
 class Registration
     
-    def name 
-        gets "Please enter your full name"
+    def self.info
+        puts "Please enter your full name"
+        @@name = gets.chomp 
+        puts "Please enter your email address"
+        @@email = gets.chomp
+        puts "Please create a password"
+        @@password = gets.chomp
     end
 
-    def email
-        gets "Please enter your email address"
+    def self.newUser 
+        User.create(name: @@name, email_address: @@email, password: @@password)
     end
-
-    def password 
-        gets "Please create a password"
-    end
-
 
 
 end

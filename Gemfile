@@ -5,5 +5,7 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "pry"
 gem "require_all"
-# frozen_string_literal: true
+gem "tty-prompt"
+gem "tty-table"
+
 
