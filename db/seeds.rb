@@ -8,10 +8,10 @@ ChoreAssign.delete_all
 # frank = User.create(name:"Frank", status: false)
 
 
-dishes = Chore.create(name: "Do the Dishes")
-trash = Chore.create(name: "Take out the trash")
-sweep = Chore.create(name: "Sweep the floors")
-bathroom = Chore.create(name: "Clean the bathroom")
+# dishes = Chore.create(name: "Do the Dishes")
+# trash = Chore.create(name: "Take out the trash")
+# sweep = Chore.create(name: "Sweep the floors")
+# bathroom = Chore.create(name: "Clean the bathroom")
 # dishes = Chore.create(name: "Do the Dishes")
 # trash = Chore.create(name: "Take out the trash")
 # sweep = Chore.create(name: "Sweep the floors")
