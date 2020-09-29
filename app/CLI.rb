@@ -11,6 +11,19 @@ class Welcome
 end
 
 class Registration
+    
+    def name 
+        gets "Please enter your full name"
+    end
+
+    def email
+        gets "Please enter your email address"
+    end
+
+    def password 
+        gets "Please create a password"
+    end
+
 
 
 end
