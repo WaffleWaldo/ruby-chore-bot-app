@@ -64,7 +64,7 @@ class LogIn
         puts "What is your email address?"
         email = gets.chomp
         puts "Please enter your password"
-        password = gets.chomp
+        password = STDIN.noecho(&:gets).chomp
 
         User.all.map do |user|
             if user.email_address == email && user.password == password
