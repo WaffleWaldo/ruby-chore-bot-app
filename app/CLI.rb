@@ -119,19 +119,23 @@ class MainMenu
         when "Mark Chore Complete"
             MainMenu.mark_complete
         end
-        
-        # if @@input == "Add Roommate"
-        #     MainMenu.add_roommate
-        # end
+    end
+
+    def self.exit
+        system("clear")
+        puts "Goodbye!"
+        sleep(1.0)
+        exit
     end
 
     def self.return_to_main
         prompt = TTY::Prompt.new
         if prompt.yes?("Return to main menu?") == true
+            sleep(0.75)
             system("clear")
             MainMenu.menu
         else
-            exit
+            self.exit
         end
     end
 
@@ -175,9 +179,7 @@ class MainMenu
         email = gets.chomp
         User.create(name:name,email_address:email)
         puts "Success! Roommate added"
-        sleep 2.0
-        system("clear")
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.delete_roommate
@@ -211,8 +213,7 @@ class MainMenu
     end
 
     def self.add_chore
-        puts "Please type in a short description of
-                of the chore you would like to add:"
+        puts "Please type in a short description of the chore you would like to add:"
         chore_name = gets.chomp
         Chore.create(name:chore_name)
         puts "Success! Chore added"
@@ -258,17 +259,17 @@ class MainMenu
     def self.switch_chores
     end
 
-    def self.send_reminders
-        mail = Mail.new do
-            from    'ChoreBot'
-            to      'j.watsonreid@gmail.com'
-            subject 'This is a test email'
-            body    "Hello! This is a friendly reminder from ChoreBot to 
-                    please complete your chores by the end of the week! 
+    # def self.send_reminders
+    #     mail = Mail.new do
+    #         from    'ChoreBot'
+    #         to      'j.watsonreid@gmail.com'
+    #         subject 'This is a test email'
+    #         body    "Hello! This is a friendly reminder from ChoreBot to 
+    #                 please complete your chores by the end of the week! 
                     
-                    Thank you!"
-        end
-        mail.delivery_method :sendmail
-        mail.deliver
-    end
+    #                 Thank you!"
+    #     end
+    #     mail.delivery_method :sendmail
+    #     mail.deliver
+    # end
 end
