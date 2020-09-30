@@ -25,20 +25,17 @@ class Welcome
     end
 
     def self.register_or_login
-        puts "Register or Login?"
-        puts "Please type in your response."
-        answer = gets.chomp.downcase
-        if answer == "register"
+        prompt = TTY::Prompt.new
+        foo = prompt.select("Register or Login", [
+            "Register",
+            "Login"
+        ])
+        case foo
+        when "Register"
             Registration.info
             Registration.newUser
-        elsif answer == "login"
+        when "Login"
             LogIn.info
-        else
-            system("clear")
-            puts "Not a valid response"
-            puts ""
-            self.register_or_login
-
         end
     end
 end
