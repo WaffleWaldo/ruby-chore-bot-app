@@ -17,9 +17,9 @@ class Welcome
      ".colorize(:light_blue)
         # puts "The digital chore wheel"
 
-        puts @@pastel.cyan(@@font.write("ChoreBot"))
-        puts "Welcome to ChoreBot!"
-        puts "The digital chore wheel"
+        # puts @@pastel.cyan(@@font.write("ChoreBot"))
+        # puts "Welcome to ChoreBot!"
+        # puts "The digital chore wheel"
     end
 
     def self.register_or_login
@@ -77,9 +77,6 @@ class LogIn
     end
 end
 
-
-class MainMenu
-    puts
 class MainMenu 
     def self.menu
         prompt = TTY::Prompt.new
