@@ -120,6 +120,8 @@ class MainMenu
             MainMenu.mark_complete
         when "Randomize Chores"
             MainMenu.randomize_chores
+        when "Switch Chores"
+            MainMenu.switch_chores
         end
     end
 
@@ -265,6 +267,25 @@ class MainMenu
     end
 
     def self.switch_chores
+        prompt = TTY::Prompt.new
+        first_name = prompt.select("Select the First Person For the Switch", User.names)
+        system('clear')
+        prompt_2 = TTY::Prompt.new
+        second_name = prompt_2.select("Select the Second Person For the Switch", User.names)
+        system('clear')
+        if first_name == second_name
+            puts "Sorry, you chose the same person twice!"
+            sleep 3.0
+            system('clear')
+            MainMenu.switch_chores
+        end
+        user_1 = User.all.select {|user| user.name == first_name}
+        user_2 = User.all.select {|user| user.name == second_name}
+
+        user_1[0].switch(user_2[0])
+        puts "Chores are now switched!!!"
+        sleep 2.0
+        MainMenu.menu
     end
 
     # def self.send_reminders
