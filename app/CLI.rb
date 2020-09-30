@@ -119,14 +119,15 @@ class MainMenu
             MainMenu.randomize_chores
         when "Switch Chores"
             MainMenu.switch_chores
+        when "Exit"
+            MainMenu.exit
         end
     end
 
     def self.exit
         system("clear")
         puts "Goodbye!"
-        sleep(1.0)
-        exit
+        sleep 1.0
     end
 
     def self.return_to_main
@@ -161,7 +162,7 @@ class MainMenu
                     system('clear')
                     user.status = true
                     user.save
-                    puts "Roommate Chores Status is updated!"
+                    puts "Roommate Chores Status is updated!".colorize(:green)
                     sleep 3.0
                     system('clear')
                     MainMenu.menu
@@ -179,7 +180,7 @@ class MainMenu
         puts "What is your roommate's email address?"
         email = gets.chomp
         User.create(name:name,email_address:email)
-        puts "Success! Roommate added"
+        puts "Success! Roommate added".colorize(:green)
         self.return_to_main
     end
 
@@ -189,13 +190,13 @@ class MainMenu
         User.all.each do |user|
             if name == user.name
                 User.all.delete(user)
-                puts "Roommate has been deleted!"
+                puts "Roommate has been deleted!".colorize(:red)
                 sleep 3.0
                 system('clear')
                 MainMenu.menu
             end
         end
-        puts 'Roommate Not Found'
+        puts 'Roommate Not Found'.colorize(:red)
         sleep 3.0
         system('clear')
         MainMenu.menu
@@ -217,7 +218,7 @@ class MainMenu
         puts "Please type in a short description of the chore you would like to add:"
         chore_name = gets.chomp
         Chore.create(name:chore_name)
-        puts "Success! Chore added"
+        puts "Success! Chore added".colorize(:green)
         sleep 3.0
         system('clear')
         MainMenu.menu
@@ -241,13 +242,13 @@ class MainMenu
         Chore.all.each do |chore|
             if chore_name == chore.name
                 Chore.all.delete(chore)
-                puts "Chore has been removed!"
+                puts "Chore has been removed!".colorize(:red)
                 sleep 3.0
                 system('clear')
                 MainMenu.menu
             end
         end
-        puts 'Chore Not Found'
+        puts 'Chore Not Found'.colorize(:red)
         sleep 3.0
         system('clear')
         MainMenu.menu
@@ -257,7 +258,7 @@ class MainMenu
         puts "Randomizing Chores!!!"
         ChoreAssign.randomize
         sleep 2.0
-        puts "Chores Assigned!"
+        puts "Chores Assigned!".colorize(:green)
         sleep 2.0
         system('clear')
         MainMenu.menu
@@ -271,7 +272,7 @@ class MainMenu
         second_name = prompt_2.select("Select the Second Person For the Switch", User.names)
         system('clear')
         if first_name == second_name
-            puts "Sorry, you chose the same person twice!"
+            puts "Sorry, you chose the same person twice!".colorize(:red)
             sleep 3.0
             system('clear')
             MainMenu.switch_chores
@@ -280,7 +281,7 @@ class MainMenu
         user_2 = User.all.select {|user| user.name == second_name}
 
         user_1[0].switch(user_2[0])
-        puts "Chores are now switched!!!"
+        puts "Chores are now switched!!!".colorize(:green)
         sleep 2.0
         MainMenu.menu
     end
