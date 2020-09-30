@@ -119,13 +119,6 @@ class MainMenu
         when "Mark Chore Complete"
             MainMenu.mark_complete
         end
-        
-        # if @@input == "Add Roommate"
-        #     MainMenu.add_roommate
-        # end
-        when "View Chore Assignments"
-            MainMenu.view_chore_assignments
-        end
     end
 
     def self.exit
@@ -220,8 +213,7 @@ class MainMenu
     end
 
     def self.add_chore
-        puts "Please type in a short description of
-                of the chore you would like to add:"
+        puts "Please type in a short description of the chore you would like to add:"
         chore_name = gets.chomp
         Chore.create(name:chore_name)
         puts "Success! Chore added"
@@ -266,17 +258,17 @@ class MainMenu
     def self.switch_chores
     end
 
-    def self.send_reminders
-        mail = Mail.new do
-            from    'ChoreBot'
-            to      'j.watsonreid@gmail.com'
-            subject 'This is a test email'
-            body    "Hello! This is a friendly reminder from ChoreBot to 
-                    please complete your chores by the end of the week! 
+    # def self.send_reminders
+    #     mail = Mail.new do
+    #         from    'ChoreBot'
+    #         to      'j.watsonreid@gmail.com'
+    #         subject 'This is a test email'
+    #         body    "Hello! This is a friendly reminder from ChoreBot to 
+    #                 please complete your chores by the end of the week! 
                     
-                    Thank you!"
-        end
-        mail.delivery_method :sendmail
-        mail.deliver
-    end
+    #                 Thank you!"
+    #     end
+    #     mail.delivery_method :sendmail
+    #     mail.deliver
+    # end
 end
