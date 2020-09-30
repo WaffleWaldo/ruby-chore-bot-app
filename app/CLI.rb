@@ -20,6 +20,8 @@ class Welcome
         # puts @@pastel.cyan(@@font.write("ChoreBot"))
         # puts "Welcome to ChoreBot!"
         # puts "The digital chore wheel"
+        puts "Welcome to ChoreBot!"
+        puts "The digital chore wheel"
     end
 
     def self.register_or_login
@@ -85,6 +87,7 @@ class MainMenu
         'Delete Roommate',
         'Add Chore',
         'Delete Chore',
+        'View Roommates',
         'View Chore Assignments',
         'Mark Chore Complete',
         'Randomize Chores',
@@ -92,35 +95,48 @@ class MainMenu
         'Send Reminders',
         'Exit'
         ])
+        self.menu_choice
+    
     end
 
-    def menu_choice
-        if @@input == "Add Roommate".downcase
-            self.add_roommate
-        end
+    def self.menu_choice
+
+        case @@input
+        when "Add Roommate"
+            MainMenu.add_roommate
+        
+        # if @@input == "Add Roommate"
+        #     MainMenu.add_roommate
+        # end
     end
 
     def self.view_chore_assignments
-        ##still working on trying to find nice way of outputting this data
         
-        # table = TTY::Table.new(["Name","Chore","Status"], [["reid","dishes"+'/n',"complete"],[]])
-        # puts table.render(:ascii)
     end
 
     def self.mark_complete
     end
 
     def self.add_roommate
-        puts "What is your rommate's full name?"
+        puts "What is your roommate's full name?"
         name = gets.chomp
         puts "What is your roommate's email address?"
-        email = get.chomp
+        email = gets.chomp
         User.create(name:name,email_address:email)
         puts "Success! Roommate added"
+        sleep 2.0
+        system("clear")
+        MainMenu.menu
     end
 
     def self.delete_roommate
+        puts "What is your roommate's full name?"
+        name = gets.chomp
 
+    end
+
+    def self.view_roommates
+    
     end
 
     def self.add_chore
