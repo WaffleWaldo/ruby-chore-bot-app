@@ -106,13 +106,21 @@ class MainMenu
         end
     end
 
+    def self.exit
+        system("clear")
+        puts "Goodbye!"
+        sleep(1.0)
+        exit
+    end
+
     def self.return_to_main
         prompt = TTY::Prompt.new
         if prompt.yes?("Return to main menu?") == true
+            sleep(0.75)
             system("clear")
             MainMenu.menu
         else
-            exit
+            self.exit
         end
     end
 
@@ -131,9 +139,7 @@ class MainMenu
         email = gets.chomp
         User.create(name:name,email_address:email)
         puts "Success! Roommate added"
-        sleep 2.0
-        system("clear")
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.delete_roommate
