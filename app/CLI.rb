@@ -123,9 +123,6 @@ class MainMenu
         # if @@input == "Add Roommate"
         #     MainMenu.add_roommate
         # end
-        when "View Chore Assignments"
-            MainMenu.view_chore_assignments
-        end
     end
 
     def self.return_to_main
@@ -255,6 +252,7 @@ class MainMenu
     end
 
     def self.randomize_chores
+
     end
 
     def self.switch_chores
