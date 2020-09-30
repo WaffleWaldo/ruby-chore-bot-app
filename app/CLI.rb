@@ -101,7 +101,6 @@ class MainMenu
     end
 
     def self.menu_choice
-
         case @@input
         when "Add Roommate"
             MainMenu.add_roommate
@@ -124,10 +123,24 @@ class MainMenu
         # if @@input == "Add Roommate"
         #     MainMenu.add_roommate
         # end
+        when "View Chore Assignments"
+            MainMenu.view_chore_assignments
+        end
+    end
+
+    def self.return_to_main
+        prompt = TTY::Prompt.new
+        if prompt.yes?("Return to main menu?") == true
+            system("clear")
+            MainMenu.menu
+        else
+            exit
+        end
     end
 
     def self.view_chore_assignments
-        
+        ChoreAssign.construct_display
+        self.return_to_main
     end
 
     def self.mark_complete

@@ -48,6 +48,7 @@ GEM
       unicode-display_width (~> 1.5)
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
+    table_print (1.5.7)
     thread_safe (0.3.6)
     tilt (2.0.10)
     tty-color (0.5.2)
@@ -83,6 +84,7 @@ DEPENDENCIES
   require_all
   sinatra-activerecord
   sqlite3
+  table_print
   tty-font
   tty-prompt
   tty-table
