@@ -39,7 +39,7 @@ class ChoreAssign < ActiveRecord::Base
         @@all_chores << Chore.all
         @@all_chores.flatten!
 
-        until @@all_chores.length == 0 do
+        # until @@all_chores.length == 0 do
             User.all.each do |user|
                 if user.chores.length < ((Chore.all.length/User.all.length.to_f).ceil)
                     random_chore = @@all_chores.sample
@@ -48,7 +48,7 @@ class ChoreAssign < ActiveRecord::Base
                     @@all_chores.delete(random_chore)
                 end
             end
-        end 
+        # end 
     end
     
 end
