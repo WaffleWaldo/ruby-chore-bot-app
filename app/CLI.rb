@@ -1,3 +1,5 @@
+
+
 ##CLI file for storing CLI classes and method
 class Welcome
     ##Print Welcome message to screen
@@ -114,13 +116,15 @@ class MainMenu
             MainMenu.switch_chores
         when "Exit"
             MainMenu.exit
+        when "Send Reminders"
+            MainMenu.send_reminders
         end
     end
 
     def self.exit
         system("clear")
         puts "Goodbye!"
-        sleep 1.0
+        system("exit")
     end
 
     def self.return_to_main
@@ -279,17 +283,29 @@ class MainMenu
         MainMenu.menu
     end
 
-    # def self.send_reminders
-    #     mail = Mail.new do
-    #         from    'ChoreBot'
-    #         to      'j.watsonreid@gmail.com'
-    #         subject 'This is a test email'
-    #         body    "Hello! This is a friendly reminder from ChoreBot to 
-    #                 please complete your chores by the end of the week! 
+    def self.send_reminders
+        options = { :address      => "smtp.gmail.com",
+            :port                 => 587,
+            :domain               => 'your.host.name',
+            :user_name            => '<username>',
+            :password             => '<password>',
+            :authentication       => 'plain',
+            :enable_starttls_auto => true  }
+
+
+
+        Mail.defaults do
+            delivery_method :smtp, options
+        end
+
+        mail = Mail.new do
+            from    'oswaldoortiz0519@gmail.com'
+            to      'j.watsonreid@gmail.com'
+            subject 'This is a test email'
+            body    "Hello! This is a friendly reminder from ChoreBot to 
+                    please complete your chores by the end of the week! 
                     
-    #                 Thank you!"
-    #     end
-    #     mail.delivery_method :sendmail
-    #     mail.deliver
-    # end
+                    Thank you!"
+        end
+    end
 end
