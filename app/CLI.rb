@@ -118,6 +118,8 @@ class MainMenu
             MainMenu.view_chore_assignments
         when "Mark Chore Complete"
             MainMenu.mark_complete
+        when "Randomize Chores"
+            MainMenu.randomize_chores
         end
     end
 
@@ -253,7 +255,13 @@ class MainMenu
     end
 
     def self.randomize_chores
-
+        puts "Randomizing Chores!!!"
+        ChoreAssign.randomize
+        sleep 2.0
+        puts "Chores Assigned!"
+        sleep 2.0
+        system('clear')
+        MainMenu.menu
     end
 
     def self.switch_chores
