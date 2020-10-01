@@ -2,9 +2,10 @@ User.delete_all
 Chore.delete_all
 ChoreAssign.delete_all
 
-# reid = User.create(name:"Reid Watson", email_address: "rocknstrings@gmail.com", password: "12345") 
+# reid = User.create(name:"Reid Watson", email_address: "reid@gmail.com", password: "12345")
+# waldo =  User.create(name:"Reid Watson", email_address: "waldo@gmail.com")
+# susan = User.create(name: "Susan")
 
-# susan = User.create(name: "Susan", status: false)
 # bobby = User.create(name: "Bobby", status: false)
 # rocky = User.create(name:"Rocky", status: false)
 # frank = User.create(name:"Frank", status: false)
