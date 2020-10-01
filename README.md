@@ -66,6 +66,17 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Sources
+--GEMS
+    -Sinatra
+    -SqLite3
+    -Pry
+    -RequireALL
+    -TTY Toolkit
+    -IO Console
+    -Twilio
+
+    
 ## License
 
 [FlatIron School License](http://learn.co/content-license)
