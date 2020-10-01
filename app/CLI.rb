@@ -320,8 +320,8 @@ class SendTxtMessage
     
     def message(user)
 
-        account_sid = 'ACf25b6d8a2c82ee447286f10ba140fe98'
-        auth_token = 'ece45f7c88a550793c706699927806bb'
+        account_sid = 
+        auth_token = 
         client = Twilio::REST::Client.new(account_sid, auth_token)
 
         from = '+12056795263' # Your Twilio number
