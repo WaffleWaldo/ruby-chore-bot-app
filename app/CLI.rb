@@ -316,7 +316,11 @@ class SendTxtMessage
         client.messages.create(
         from: from,
         to: to,
-        body: "Hello #{user.name}! 
+        body: "-
+        
+        
+        Hello #{user.name}!
+
 This is a friendly reminder from ChoreBot! 
 These are your current chore assignments:
         #{chore_list}.
