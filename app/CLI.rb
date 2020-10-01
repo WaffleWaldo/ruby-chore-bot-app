@@ -121,13 +121,20 @@ class MainMenu
 
     def self.return_to_main
         system("clear")
-        sleep(0.5)
+        sleep(2.0)
         MainMenu.menu
     end
 
     def self.view_chore_assignments
         ChoreAssign.construct_display
-        self.return_to_main
+        prompt = TTY::Prompt.new
+        exitt = prompt.select("", [
+        "Exit"])
+        case exitt
+        when "Exit"
+            system('clear')
+            MainMenu.menu
+        end
     end
 
     def self.mark_complete
@@ -148,7 +155,7 @@ class MainMenu
                     user.save
                     puts "Roommate Chores Status is updated!".colorize(:green)
                     sleep 1.0
-                    MainMenu.mark_complete
+                    MainMenu.menu
                 when "Exit"
                     self.exit
                 end
@@ -235,7 +242,7 @@ class MainMenu
         ChoreAssign.randomize
         sleep 2.0
         puts "Chores Assigned!".colorize(:green)
-        self.return_to_main
+        MainMenu.view_chore_assignments
     end
 
     def self.switch_chores

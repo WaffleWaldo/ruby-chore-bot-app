@@ -29,7 +29,11 @@ class ChoreAssign < ActiveRecord::Base
         puts table.render(:ascii)
     end
     def self.user_reset
-        User.all.map {|user| user.chores.clear}
+        User.all.each do |user| 
+            user.chores.clear
+            user.status = false
+            user.save
+        end
     end
 
     ##Helper method for .randomize
