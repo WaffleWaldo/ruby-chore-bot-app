@@ -1,5 +1,5 @@
 ##CLI file for storing CLI classes and method
-require_relative '../env.rb'
+require_relative '../config/environment'
 class Welcome
     ##Print Welcome message to screen
     
