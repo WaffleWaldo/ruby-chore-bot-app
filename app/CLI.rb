@@ -1,4 +1,5 @@
 ##CLI file for storing CLI classes and method
+require_relative '../env.rb'
 class Welcome
     ##Print Welcome message to screen
     
@@ -315,13 +316,11 @@ end
 
 class SendTxtMessage
     def roommate_info
-        phone_number = 
+        phone_number = "+1#{user.phone_number}"
     end
     
     def message(user)
-
-        
-        client = Twilio::REST::Client.new(account_sid, auth_token)
+        client = Twilio::REST::Client.new(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
         from = '+12056795263' # Your Twilio number
         to = user.phone_number
