@@ -11,7 +11,7 @@ class ChoreAssign < ActiveRecord::Base
             if assign.user_id != nil
                 row << User.find(assign.user_id).name
                 row << Chore.find(assign.chore_id).name
-                if User.find(assign.user_id).status == true
+                if Chore.find(assign.chore_id).status == true
                     row << "Complete".colorize(:green)
                 else
                     row << "Incomplete".colorize(:red)
@@ -31,8 +31,13 @@ class ChoreAssign < ActiveRecord::Base
     def self.user_reset
         User.all.each do |user| 
             user.chores.clear
-            user.status = false
             user.save
+        end
+    end
+    def self.chore_reset
+        Chore.all.each do |chore|
+            chore.status = false
+            chore.save
         end
     end
 
@@ -46,6 +51,7 @@ class ChoreAssign < ActiveRecord::Base
     def self.randomize
         self.delete_all
         self.user_reset
+        self.chore_reset
         @@all_chores << Chore.all
         @@all_chores.flatten!
 

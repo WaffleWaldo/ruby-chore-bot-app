@@ -1,5 +1,3 @@
-
-
 ##CLI file for storing CLI classes and method
 class Welcome
     ##Print Welcome message to screen
@@ -143,21 +141,17 @@ class MainMenu
         User.all.each do |user|
             if roommate == user.name
                 system('clear')
-                roommate_prompt = TTY::Prompt.new
-                roommate_prompt = prompt.select("", [
-                    "Mark All Chores Completed",
-                    "Exit"
-                ])
-                case roommate_prompt
-                when "Mark All Chores Completed"
-                    system('clear')
-                    user.status = true
-                    user.save
-                    puts "Roommate Chores Status is updated!".colorize(:green)
-                    sleep 1.0
-                    MainMenu.menu
-                when "Exit"
-                    self.exit
+                chore_prompt = TTY::Prompt.new
+                chore_prompt = prompt.select("Chose Chore To Mark Complete", user.chores.names)
+                Chore.all.each do |chore|
+                    if chore_prompt == chore.name
+                        system('clear')
+                        chore.status = true
+                        chore.save
+                        puts "Chore Is Now Marked Complete"
+                        sleep 2.0
+                        MainMenu.menu
+                    end
                 end
             end
         end

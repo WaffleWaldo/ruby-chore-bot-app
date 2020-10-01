@@ -5,16 +5,6 @@ class User < ActiveRecord::Base
     def self.names
         self.all.map {|user| user.name}
     end
-
-    def self.chore_status
-        self.all.map do |user|
-            if user.status == false
-                "incomplete"
-            else
-                "complete"
-            end
-        end
-    end
     
     def add_chore(chore)
         self.chores << chore
@@ -22,11 +12,6 @@ class User < ActiveRecord::Base
         
     def chore_names
         self.chores.map {|chore| chore.name}
-    end
-
-    def complete
-        self.status = true
-        self.save
     end
 
     def switch(user)

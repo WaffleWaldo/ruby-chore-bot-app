@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 8) do
 
   create_table "chore_assigns", force: :cascade do |t|
     t.integer "user_id"
@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 6) do
 
   create_table "chores", force: :cascade do |t|
     t.string "name"
+    t.boolean "status"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email_address"
     t.string "password"
-    t.boolean "status"
   end
 
 end
