@@ -12,5 +12,3 @@ gem "tty-font"
 gem "pastel"
 gem "mail"
 gem 'io-console'
-
-

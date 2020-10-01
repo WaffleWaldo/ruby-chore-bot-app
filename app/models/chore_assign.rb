@@ -11,6 +11,12 @@ class ChoreAssign < ActiveRecord::Base
             if assign.user_id != nil
                 row << User.find(assign.user_id).name
                 row << Chore.find(assign.chore_id).name
+                if User.find(assign.user_id).status == true
+                    row << "Complete".colorize(:green)
+                else
+                    row << "Incomplete".colorize(:red)
+                end
+                
                 rows << row
             end
         end
@@ -19,7 +25,7 @@ class ChoreAssign < ActiveRecord::Base
     
     
     def self.construct_display
-        table = TTY::Table.new(["Name","Chore"], ChoreAssign.chore_assignment_array)
+        table = TTY::Table.new(["Name","Chore","Status"], ChoreAssign.chore_assignment_array)
         puts table.render(:ascii)
     end
     def self.user_reset
