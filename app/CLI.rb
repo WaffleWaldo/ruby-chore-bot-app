@@ -312,3 +312,26 @@ class ChoreAnimation
         sleep 0.25
     end
 end
+
+class SendTxtMessage
+    def roommate_info
+        phone_number = 
+    end
+    
+    def message(user)
+
+        account_sid = 'ACf25b6d8a2c82ee447286f10ba140fe98'
+        auth_token = 'ece45f7c88a550793c706699927806bb'
+        client = Twilio::REST::Client.new(account_sid, auth_token)
+
+        from = '+12056795263' # Your Twilio number
+        to = user.phone_number
+        #'+12069148755' # Your mobile phone number
+
+        client.messages.create(
+        from: from,
+        to: to,
+        body: "Hello! This is a friendly reminder from ChoreBot! Please complete your chores for the week. Thank You!"
+        )
+    end
+end
