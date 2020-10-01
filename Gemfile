@@ -12,3 +12,4 @@ gem "tty-font"
 gem "pastel"
 gem "mail"
 gem 'io-console'
+gem 'twilio-ruby'

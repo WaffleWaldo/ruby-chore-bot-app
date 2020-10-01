@@ -26,34 +26,39 @@ class Welcome
     end
 end
 
+
+
+
 class Registration
     def self.info
         puts "Please enter your full name"
         @@name = gets.chomp 
-        puts "Please enter your email address"
-        @@email = gets.chomp
+        puts "Please enter your cell phone number"
+        @@phone = gets.chomp
         puts "Please create a password"
         @@password = gets.chomp
     end
 
     def self.newUser 
-        user = User.create(name: @@name, email_address: @@email, password: @@password)
+        user = User.create(name: @@name, phone_number: @@phone, password: @@password)
         system("clear")
         puts "Welcome #{user.name}!"
         MainMenu.menu
     end
 end
 
+
+
 class LogIn
     def self.info
         
-        puts "What is your email address?"
-        email = gets.chomp
+        puts "What is your name?"
+        name = gets.chomp
         puts "Please enter your password"
         password = STDIN.noecho(&:gets).chomp
 
         User.all.map do |user|
-            if user.email_address == email && user.password == password
+            if user.name == name && user.password == password
                 system("clear")
                 puts "Welcome #{user.name}!"
                 MainMenu.menu
@@ -119,8 +124,8 @@ class MainMenu
     end
 
     def self.return_to_main
+        sleep(3.0)
         system("clear")
-        sleep(2.0)
         MainMenu.menu
     end
 
@@ -161,9 +166,9 @@ class MainMenu
     def self.add_roommate
         puts "What is your roommate's full name?"
         name = gets.chomp
-        puts "What is your roommate's email address?"
-        email = gets.chomp
-        User.create(name:name,email_address:email)
+        puts "What is your roommate's phone number?"
+        phone = gets.chomp
+        User.create(name: name, phone_number: phone)
         puts "Success! Roommate added".colorize(:green)
         self.return_to_main
     end
@@ -260,29 +265,13 @@ class MainMenu
     end
 
     def self.send_reminders
-        options = { :address      => "smtp.gmail.com",
-            :port                 => 587,
-            :domain               => 'your.host.name',
-            :user_name            => '<username>',
-            :password             => '<password>',
-            :authentication       => 'plain',
-            :enable_starttls_auto => true  }
-
-
-
-        Mail.defaults do
-            delivery_method :smtp, options
-        end
-
-        mail = Mail.new do
-            from    'oswaldoortiz0519@gmail.com'
-            to      'j.watsonreid@gmail.com'
-            subject 'This is a test email'
-            body    "Hello! This is a friendly reminder from ChoreBot to 
-                    please complete your chores by the end of the week! 
-                    
-                    Thank you!"
-        end
+        prompt = TTY::Prompt.new
+        roommate = prompt.select("Who would you like to send a reminder", User.names)
+        SendTxtMessage.message(User.find_by(name: roommate))
+        puts "Reminder has been sent!"
+        sleep 2.0
+        self.return_to_main
+        
     end
 end
 
@@ -315,21 +304,26 @@ class ChoreAnimation
 end
 
 class SendTxtMessage
-    def roommate_info
-        phone_number = "+1#{user.phone_number}"
-    end
-    
-    def message(user)
+    def self.message(user)
+        chore_list = user.chores.map {|chore|chore.name}.join(', ')
+        phone_num = "+1"+user.phone_number
         client = Twilio::REST::Client.new(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
         from = '+12056795263' # Your Twilio number
-        to = user.phone_number
+        to = phone_num
         #'+12069148755' # Your mobile phone number
 
         client.messages.create(
         from: from,
         to: to,
-        body: "Hello! This is a friendly reminder from ChoreBot! Please complete your chores for the week. Thank You!"
+        body: "Hello #{user.name}! 
+This is a friendly reminder from ChoreBot! 
+These are you current chore assignments:
+        #{chore_list}.
+
+Please complete your chores by the end of the week!
+
+Thank You!"
         )
     end
 end
