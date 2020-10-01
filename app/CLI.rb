@@ -318,7 +318,7 @@ class SendTxtMessage
         to: to,
         body: "Hello #{user.name}! 
 This is a friendly reminder from ChoreBot! 
-These are you current chore assignments:
+These are your current chore assignments:
         #{chore_list}.
 
 Please complete your chores by the end of the week!
