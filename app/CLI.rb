@@ -8,15 +8,7 @@ class Welcome
     @@pastel = Pastel.new
 
     def self.welcome_msg
-        puts "
-        ██████╗██╗  ██╗ ██████╗ ██████╗ ███████╗    ██████╗  ██████╗ ████████╗
-       ██╔════╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔══██╗██╔═══██╗╚══██╔══╝
-       ██║     ███████║██║   ██║██████╔╝█████╗      ██████╔╝██║   ██║   ██║   
-       ██║     ██╔══██║██║   ██║██╔══██╗██╔══╝      ██╔══██╗██║   ██║   ██║   
-       ╚██████╗██║  ██║╚██████╔╝██║  ██║███████╗    ██████╔╝╚██████╔╝   ██║   
-        ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝    ╚═════╝  ╚═════╝    ╚═╝   
-                   Welcome to Chore Bot, The digital chore wheel!                                                  
-       ".colorize(:light_blue)
+    ChoreAnimation.animation
     end
 
     def self.register_or_login
@@ -81,9 +73,9 @@ class MainMenu
         'Delete Chore',
         'View Roommates',
         'View Chores',
+        'Randomize Chores',
         'View Chore Assignments',
         'Mark Chore Complete',
-        'Randomize Chores',
         'Switch Chores',
         'Send Reminders',
         'Exit'
@@ -128,14 +120,9 @@ class MainMenu
     end
 
     def self.return_to_main
-        prompt = TTY::Prompt.new
-        if prompt.yes?("Return to main menu?") == true
-            sleep(0.75)
-            system("clear")
-            MainMenu.menu
-        else
-            self.exit
-        end
+        system("clear")
+        sleep(0.5)
+        MainMenu.menu
     end
 
     def self.view_chore_assignments
@@ -160,12 +147,10 @@ class MainMenu
                     user.status = true
                     user.save
                     puts "Roommate Chores Status is updated!".colorize(:green)
-                    sleep 3.0
-                    system('clear')
-                    MainMenu.menu
-                when "Exit"
-                    system('clear')
+                    sleep 1.0
                     MainMenu.mark_complete
+                when "Exit"
+                    self.exit
                 end
             end
         end
@@ -194,9 +179,7 @@ class MainMenu
             end
         end
         puts 'Roommate Not Found'.colorize(:red)
-        sleep 3.0
-        system('clear')
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.view_roommates
@@ -240,15 +223,11 @@ class MainMenu
             if chore_name == chore.name
                 Chore.all.delete(chore)
                 puts "Chore has been removed!".colorize(:red)
-                sleep 3.0
-                system('clear')
-                MainMenu.menu
+                self.return_to_main
             end
         end
         puts 'Chore Not Found'.colorize(:red)
-        sleep 3.0
-        system('clear')
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.randomize_chores
@@ -256,9 +235,7 @@ class MainMenu
         ChoreAssign.randomize
         sleep 2.0
         puts "Chores Assigned!".colorize(:green)
-        sleep 2.0
-        system('clear')
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.switch_chores
@@ -270,17 +247,14 @@ class MainMenu
         system('clear')
         if first_name == second_name
             puts "Sorry, you chose the same person twice!".colorize(:red)
-            sleep 3.0
-            system('clear')
-            MainMenu.switch_chores
+            self.return_to_main
         end
         user_1 = User.all.select {|user| user.name == first_name}
         user_2 = User.all.select {|user| user.name == second_name}
 
         user_1[0].switch(user_2[0])
         puts "Chores are now switched!!!".colorize(:green)
-        sleep 2.0
-        MainMenu.menu
+        self.return_to_main
     end
 
     def self.send_reminders
@@ -307,5 +281,33 @@ class MainMenu
                     
                     Thank you!"
         end
+    end
+end
+
+class ChoreAnimation
+
+        @@iteration_1 = " ██████╗██╗  ██╗ ██████╗ ██████╗ ███████╗    ██████╗  ██████╗ ████████╗".colorize(:light_blue)
+        @@iteration_2 = "██╔════╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╔══██╗██╔═══██╗╚══██╔══╝".colorize(:light_blue)
+        @@iteration_3 = "██║     ███████║██║   ██║██████╔╝█████╗      ██████╔╝██║   ██║   ██║   ".colorize(:light_blue)
+        @@iteration_4 = "██║     ██╔══██║██║   ██║██╔══██╗██╔══╝      ██╔══██╗██║   ██║   ██║   ".colorize(:light_blue)
+        @@iteration_5 = "╚██████╗██║  ██║╚██████╔╝██║  ██║███████╗    ██████╔╝╚██████╔╝   ██║   ".colorize(:light_blue)
+        @@iteration_6 = " ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝    ╚═════╝  ╚═════╝    ╚═╝   ".colorize(:light_blue)
+        @@iteration_7 = "            Welcome to Chore Bot, The digital chore wheel!             ".colorize(:light_blue)
+
+    def self.animation 
+        puts @@iteration_1
+        sleep 0.25
+        puts @@iteration_2
+        sleep 0.25
+        puts @@iteration_3
+        sleep 0.25
+        puts @@iteration_4
+        sleep 0.25
+        puts @@iteration_5
+        sleep 0.25
+        puts @@iteration_6
+        sleep 0.25
+        puts @@iteration_7
+        sleep 0.25
     end
 end
