@@ -1,5 +1,6 @@
 ##CLI file for storing CLI classes and method
 require_relative '../config/environment'
+require_relative '../env.rb'
 class Welcome
     ##Print Welcome message to screen
     
@@ -156,6 +157,7 @@ class MainMenu
                         chore.save
                         puts "Chore Is Now Marked Complete"
                         sleep 2.0
+                        system('clear')
                         MainMenu.menu
                     end
                 end
