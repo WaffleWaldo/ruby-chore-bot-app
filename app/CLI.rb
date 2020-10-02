@@ -124,7 +124,7 @@ class MainMenu
     end
 
     def self.return_to_main
-        sleep(3.0)
+        sleep(2.0)
         system("clear")
         MainMenu.menu
     end
@@ -174,19 +174,17 @@ class MainMenu
     end
 
     def self.delete_roommate
-        puts "What is your roommate's full name?"
-        name = gets.chomp
+        prompt = TTY::Prompt.new
+        prompt = prompt.select("Which Roommate Would You Like to Delete?", User.names)
         User.all.each do |user|
-            if name == user.name
-                User.all.delete(user)
-                puts "Roommate has been deleted!".colorize(:red)
-                sleep 3.0
+            case prompt
+            when user.name
                 system('clear')
-                MainMenu.menu
-            end
-        end
-        puts 'Roommate Not Found'.colorize(:red)
-        self.return_to_main
+                puts "#{user.name} has been removed!".colorize(:red)
+                user.delete
+                self.return_to_main
+            end 
+        end             
     end
 
     def self.view_roommates
@@ -224,17 +222,15 @@ class MainMenu
     end
 
     def self.delete_chore
-        puts "What chore would you like to remove"
-        chore_name = gets.chomp
+        prompt = TTY::Prompt.new
+        prompt = prompt.select("Which Chore Would You Like to Delete?", Chore.names)
         Chore.all.each do |chore|
-            if chore_name == chore.name
-                Chore.all.delete(chore)
-                puts "Chore has been removed!".colorize(:red)
+            if prompt == chore.name
+                chore.delete
+                puts "#{chore.name} has been removed!".colorize(:red)
                 self.return_to_main
             end
         end
-        puts 'Chore Not Found'.colorize(:red)
-        self.return_to_main
     end
 
     def self.randomize_chores

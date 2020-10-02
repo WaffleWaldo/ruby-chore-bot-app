@@ -2,23 +2,17 @@ User.delete_all
 Chore.delete_all
 ChoreAssign.delete_all
 
-# reid = User.create(name:"Reid Watson", email_address: "reid@gmail.com", password: "12345")
-# waldo =  User.create(name:"Reid Watson", email_address: "waldo@gmail.com")
-# susan = User.create(name: "Susan")
-
-# bobby = User.create(name: "Bobby", status: false)
-# rocky = User.create(name:"Rocky", status: false)
-# frank = User.create(name:"Frank", status: false)
+User.create(name:"Reid Watson", phone_number: "2069148755", password: "12345")
+User.create(name:"Brad Pitt", phone_number: "2069148755")
+User.create(name:"Scarlett Johansson", phone_number: "2069148755")
 
 
-# dishes = Chore.create(name: "Do the Dishes")
-# trash = Chore.create(name: "Take out the trash")
-# sweep = Chore.create(name: "Sweep the floors")
-# bathroom = Chore.create(name: "Clean the bathroom")
 
-# dishes = Chore.create(name: "Do the Dishes")
-# trash = Chore.create(name: "Take out the trash")
-# sweep = Chore.create(name: "Sweep the floors")
-# bathroom = Chore.create(name: "Clean the bathroom")
+Chore.create(name: "Do the Dishes")
+Chore.create(name: "Take out the trash")
+Chore.create(name: "Sweep the floors")
+Chore.create(name: "Clean the bathroom")
+
+
 
 
