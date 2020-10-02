@@ -305,7 +305,7 @@ end
 
 class SendTxtMessage
     def self.message(user)
-        chore_list = user.chores.map {|chore|chore.name}.join(', ')
+        #chore_list = user.chores.map {|chore|chore.name}.join(', ')
         phone_num = "+1"+user.phone_number
         client = Twilio::REST::Client.new(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
@@ -323,7 +323,7 @@ class SendTxtMessage
 
 This is a friendly reminder from ChoreBot! 
 These are your current chore assignments:
-        #{chore_list}.
+        #{user.chore_names.join(", ")}.
 
 Please complete your chores by the end of the week!
 
