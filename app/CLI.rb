@@ -319,6 +319,7 @@ class SendTxtMessage
 
 This is a friendly reminder from ChoreBot! 
 These are your current chore assignments:
+
         #{user.chore_names.join(", ")}.
 
 Please complete your chores by the end of the week!
